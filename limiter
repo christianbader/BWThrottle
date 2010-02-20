@@ -1,0 +1,21 @@
+#!/bin/sh
+
+COMMAND=$1
+
+if [ "$COMMAND" == "start" ]; then
+	RULE=100
+	BW=$2KByte/s
+	DELAY=$3ms
+	PORT=$4
+
+	ipfw pipe $RULE config bw $BW delay $DELAY
+	ipfw add pipe $RULE src-port $PORT
+
+elif [ "$COMMAND" == "stop" ]; then
+	
+	while [ -n "$2" ]; do
+		RULE=$2
+		ipfw delete $RULE
+		shift
+	done
+fi

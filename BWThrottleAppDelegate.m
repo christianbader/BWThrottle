@@ -8,6 +8,12 @@
 
 #import "BWThrottleAppDelegate.h"
 
+@interface BWThrottleAppDelegate (PrivateMethods)
+
+- (void)authorize;
+
+@end
+
 @implementation BWThrottleAppDelegate
 
 @synthesize window;
@@ -19,11 +25,6 @@
 @synthesize port;
 @synthesize delay;
 @synthesize activeRule;
-@synthesize active;
-
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification 
-{	
-}
 
 - (void)awakeFromNib
 {
@@ -43,27 +44,12 @@
 	
 	// Check for active rules
 	if (activeRule == nil || [activeRule intValue] == 0) {
-		active = NO;
+		limiterActive = NO;
 	} else {
-		active = YES;
+		limiterActive = YES;
 	}
 	
 	[self updateUI];
-		
-	//Authorization
-
-	OSStatus status;
-	
-	status = AuthorizationCreate(NULL, kAuthorizationEmptyEnvironment, kAuthorizationFlagDefaults, &authorizationRef);
-	
-	if (status != errAuthorizationSuccess)
-		NSLog(@"Error %d", status);
-	
-	AuthorizationItem right = {kAuthorizationRightExecute, 0, NULL, 0};
-	AuthorizationRights rights = {1, &right};
-	AuthorizationFlags flags = kAuthorizationFlagInteractionAllowed | kAuthorizationFlagExtendRights;
-	
-	status = AuthorizationCopyRights(authorizationRef, &rights, NULL, flags, NULL);
 }
 
 - (void)saveSettings {
@@ -88,7 +74,7 @@
 	delayText.stringValue = [NSString stringWithFormat:@"%i", self.delay];
 	
 	//Enable or disable the UI elements
-	if (active) {
+	if (limiterActive) {
 		[inputText setEnabled:NO];
 		[portText setEnabled:NO];
 		[delayText setEnabled:NO];
@@ -119,14 +105,14 @@
 	
 	if (status != errAuthorizationSuccess) {
 		NSLog(@"Error: %d", status);
+        return nil;
 	} else {
 		NSFileHandle *handle = [[NSFileHandle alloc] initWithFileDescriptor:fileno(pipe)];
-		string = [[NSString alloc] initWithData:[handle readDataToEndOfFile] encoding:NSUTF8StringEncoding];
+		string = [[[NSString alloc] initWithData:[handle readDataToEndOfFile] encoding:NSUTF8StringEncoding] autorelease];
+		[handle release];
 	}
-	
-	int ruleNumber = [string intValue];
-	
-	return [NSString stringWithFormat:@"%d", ruleNumber];
+		
+	return [NSString stringWithFormat:@"%d", [string intValue]];
 }
 
 - (void)releaseAuthorization {
@@ -139,46 +125,55 @@
 #pragma mark -
 #pragma mark action handling
 
-- (IBAction)setBandwidth:(id)sender
+- (IBAction)limitBandwidth:(id)sender
 {
-	if (active) {
-		//Delete the actual rules
-		self.activeRule = [self execute:@"stop" withArguments:[NSArray arrayWithObject:self.activeRule]];
-		active = NO;
-		
-	} else {
-		
-		//Bandwidth
-		if ([inputText intValue] < 0) {
-			bwidth = 0;
-		} else {
-			bwidth = [inputText intValue];
-		}
-		
-		//Port
-		if ([portText intValue] > 65536) {
-			port = 65536;
-		} else if ([portText intValue] < 1) {
-			port = 1;
-		} else {
-			port = [portText intValue];
-		}
-		
-		//Delay
-		if ([delayText intValue] >= 10000) {
-			delay = 9999;
-		} else if ([delayText intValue] < 0) {
-			delay = 0;
-		} else {
-			delay = [delayText intValue];
-		}		
-
-		NSArray *arguments = [NSArray arrayWithObjects:[NSString stringWithFormat:@"%i", bwidth], [NSString stringWithFormat:@"%i", delay], [NSString stringWithFormat:@"%i", port], nil];
-		self.activeRule = [self execute:@"start" withArguments:arguments];
-		active = YES;
+	if (!authorized) {
+		[self authorize];
 	}
 	
-	[self updateUI];
+	if (authorized) {
+		
+		if (limiterActive) {
+			//Delete the actual rules
+			self.activeRule = [self execute:@"stop" withArguments:[NSArray arrayWithObject:self.activeRule]];
+			limiterActive = NO;
+			
+		} else {
+			
+			//Bandwidth
+			if ([inputText intValue] < 0) {
+				bwidth = 0;
+			} else {
+				bwidth = [inputText intValue];
+			}
+			
+			//Port
+			if ([portText intValue] > 65536) {
+				port = 65536;
+			} else if ([portText intValue] < 1) {
+				port = 1;
+			} else {
+				port = [portText intValue];
+			}
+			
+			//Delay
+			if ([delayText intValue] >= 10000) {
+				delay = 9999;
+			} else if ([delayText intValue] < 0) {
+				delay = 0;
+			} else {
+				delay = [delayText intValue];
+			}		
+			
+			NSArray *arguments = [NSArray arrayWithObjects:[NSString stringWithFormat:@"%i", bwidth], [NSString stringWithFormat:@"%i", delay], [NSString stringWithFormat:@"%i", port], nil];
+            
+			self.activeRule = [self execute:@"start" withArguments:arguments];
+            if (activeRule) {
+                limiterActive = YES; 
+            }
+		}
+		[self updateUI];
+	}
 }
 
 #pragma mark -
@@ -186,34 +181,41 @@
 
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSNotification *)aNotification
 {	
-	if (self.active) {
-		NSString *title = @"Warning!";
-		NSString *defaultButton = @"Yes";
-		NSString *alternateButton = @"No";
-		NSString *otherButton = nil;
-		NSString *message = @"Keep active in background?";
-		
-		NSBeep();
-		NSBeginAlertSheet(title, defaultButton, alternateButton, otherButton, window, self, @selector(sheetDidEnd:returnCode:contextInfo:), nil, nil, message);
-		
-		return NSTerminateCancel;
-	} else {
-		return NSTerminateNow;
+	if (limiterActive) {
+        [self limitBandwidth:nil];
+        
+        [self releaseAuthorization];
+        
+        //Save the current user settings
+        [self saveSettings];
 	}
+    
+    return NSTerminateNow;
 }
 
-- (void)sheetDidEnd:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo
-{	
-	if ( returnCode != NSAlertDefaultReturn ) { 
-		[self setBandwidth:nil];
+#pragma mark -
+#pragma mark Authorization handling
+
+- (void)authorize {
+	
+	//Authorization
+	
+	OSStatus status;
+	
+	status = AuthorizationCreate(NULL, kAuthorizationEmptyEnvironment, kAuthorizationFlagDefaults, &authorizationRef);
+	
+	if (status != errAuthorizationSuccess) {
+		NSLog(@"Error %d", status);
+		authorized = NO;
+	} else {
+		authorized = YES;
 	}
 	
-	[self releaseAuthorization];
+	AuthorizationItem right = {kAuthorizationRightExecute, 0, NULL, 0};
+	AuthorizationRights rights = {1, &right};
+	AuthorizationFlags flags = kAuthorizationFlagInteractionAllowed | kAuthorizationFlagExtendRights;
 	
-	//Save the current user settings
-	[self saveSettings];
-	
-	exit (0);
+	AuthorizationCopyRights(authorizationRef, &rights, NULL, flags, NULL);
 }
 
 @end

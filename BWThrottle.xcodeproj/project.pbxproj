@@ -14,6 +14,8 @@
 		EB35F99910CBA89B00CD86E4 /* limiter in Resources */ = {isa = PBXBuildFile; fileRef = EB35F99810CBA89B00CD86E4 /* limiter */; };
 		EB45AAF510C04F830066F962 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB45AAE310C04ECD0066F962 /* Security.framework */; };
 		EBC3B43010C050C20042236C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EBC3B42F10C050C20042236C /* main.m */; };
+		EBD7844713367B7100884F60 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = EBD7844613367B7100884F60 /* Icon.png */; };
+		EBD7844913367C5800884F60 /* Icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = EBD7844813367C5800884F60 /* Icon.icns */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		EB45AADF10C04EC20066F962 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		EB45AAE310C04ECD0066F962 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		EBC3B42F10C050C20042236C /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		EBD7844613367B7100884F60 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		EBD7844813367C5800884F60 /* Icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Icon.icns; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +91,8 @@
 		29B97314FDCFA39411CA2CEA /* BWThrottle */ = {
 			isa = PBXGroup;
 			children = (
+				EBD7844813367C5800884F60 /* Icon.icns */,
+				EBD7844613367B7100884F60 /* Icon.png */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -153,7 +159,14 @@
 			isa = PBXProject;
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "BWThrottle" */;
 			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* BWThrottle */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -171,6 +184,8 @@
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
 				1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */,
 				EB35F99910CBA89B00CD86E4 /* limiter in Resources */,
+				EBD7844713367B7100884F60 /* Icon.png in Resources */,
+				EBD7844913367C5800884F60 /* Icon.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

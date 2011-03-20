@@ -27,7 +27,9 @@
 	
 	NSString *activeRule;
 	
-	BOOL active;
+	BOOL limiterActive;
+	
+	BOOL authorized;
 }
 
 @property (assign) IBOutlet NSWindow *window;
@@ -39,9 +41,8 @@
 @property (nonatomic) int port;
 @property (nonatomic) int delay;
 @property (nonatomic, copy) NSString *activeRule;
-@property (nonatomic) BOOL active;
 
-- (IBAction)setBandwidth:(id)sender;
+- (IBAction)limitBandwidth:(id)sender;
 - (NSString *)execute:(NSString *)command withArguments:(NSArray *)arguments;
 - (void)updateUI;
 

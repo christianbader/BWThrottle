@@ -10,16 +10,16 @@
 	};
 	256AC3D80F4B6AC300CF3369 /* BWThrottleAppDelegate.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {915, 728}}";
-			sepNavSelRange = "{79, 0}";
-			sepNavVisRange = "{0, 502}";
+			sepNavIntBoundsRect = "{{0, 0}, {915, 650}}";
+			sepNavSelRange = "{1002, 0}";
+			sepNavVisRange = "{286, 856}";
 		};
 	};
 	256AC3D90F4B6AC300CF3369 /* BWThrottleAppDelegate.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1048, 2964}}";
-			sepNavSelRange = "{545, 0}";
-			sepNavVisRange = "{522, 807}";
+			sepNavIntBoundsRect = "{{0, 0}, {1342, 3107}}";
+			sepNavSelRange = "{4676, 0}";
+			sepNavVisRange = "{3695, 687}";
 		};
 	};
 	256AC3F00F4B6AF500CF3369 /* BWThrottle_Prefix.pch */ = {
@@ -39,6 +39,7 @@
 		);
 		breakpoints = (
 			EBC3B46010C052840042236C /* AuthHelperTool.m:11 */,
+			EB640AEB12D65C8C0038894A /* BWThrottleAppDelegate.m:172 */,
 		);
 		codeSenseManager = EB45A9C110C03A090066F962 /* Code sense */;
 		executables = (
@@ -103,19 +104,20 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 288367375;
-			PBXWorkspaceStateSaveDate = 288367375;
+			PBXPerProjectTemplateStateSaveDate = 316036133;
+			PBXWorkspaceStateSaveDate = 316036133;
 		};
 		perUserProjectItems = {
 			EB3056C310CDA3CB00B66C14 /* PBXTextBookmark */ = EB3056C310CDA3CB00B66C14 /* PBXTextBookmark */;
 			EB45AA3010C042460066F962 /* PBXTextBookmark */ = EB45AA3010C042460066F962 /* PBXTextBookmark */;
+			EB640AD512D656CD0038894A /* PBXTextBookmark */ = EB640AD512D656CD0038894A /* PBXTextBookmark */;
+			EB640AE812D65C6F0038894A /* PBXTextBookmark */ = EB640AE812D65C6F0038894A /* PBXTextBookmark */;
+			EB640AFF12D65E980038894A /* PBXTextBookmark */ = EB640AFF12D65E980038894A /* PBXTextBookmark */;
 			EB64640A10C2AC840025559A /* PlistBookmark */ = EB64640A10C2AC840025559A /* PlistBookmark */;
 			EB64640C10C2AC840025559A /* PBXTextBookmark */ = EB64640C10C2AC840025559A /* PBXTextBookmark */;
 			EB64D39C10C3233C003341C4 /* PBXTextBookmark */ = EB64D39C10C3233C003341C4 /* PBXTextBookmark */;
 			EBAB5AE91130201000C6029A /* PBXTextBookmark */ = EBAB5AE91130201000C6029A /* PBXTextBookmark */;
-			EBAB5AEF1130208100C6029A /* PBXTextBookmark */ = EBAB5AEF1130208100C6029A /* PBXTextBookmark */;
-			EBAB5B1E1130230500C6029A /* PBXTextBookmark */ = EBAB5B1E1130230500C6029A /* PBXTextBookmark */;
-			EBD9C81811380CB2002B778E /* PBXTextBookmark */ = EBD9C81811380CB2002B778E /* PBXTextBookmark */;
+			EBBF5FC012AA6C1E00932B36 /* PBXTextBookmark */ = EBBF5FC012AA6C1E00932B36 /* PBXTextBookmark */;
 		};
 		sourceControlManager = EB45A9C010C03A090066F962 /* Source Control */;
 		userBuildSettings = {
@@ -220,6 +222,54 @@
 		path = /Users/ente/Desktop/BWThrottle/AuthHelperTool.m;
 		sourceTree = "<absolute>";
 	};
+	EB640AD512D656CD0038894A /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 256AC3D80F4B6AC300CF3369 /* BWThrottleAppDelegate.h */;
+		name = "BWThrottleAppDelegate.h: 44";
+		rLen = 0;
+		rLoc = 1002;
+		rType = 0;
+		vrLen = 856;
+		vrLoc = 286;
+	};
+	EB640AE812D65C6F0038894A /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 256AC3D90F4B6AC300CF3369 /* BWThrottleAppDelegate.m */;
+		name = "BWThrottleAppDelegate.m: 130";
+		rLen = 0;
+		rLoc = 3686;
+		rType = 0;
+		vrLen = 631;
+		vrLoc = 3572;
+	};
+	EB640AEB12D65C8C0038894A /* BWThrottleAppDelegate.m:172 */ = {
+		isa = PBXFileBreakpoint;
+		actions = (
+		);
+		breakpointStyle = 0;
+		continueAfterActions = 0;
+		countType = 0;
+		delayBeforeContinue = 0;
+		fileReference = 256AC3D90F4B6AC300CF3369 /* BWThrottleAppDelegate.m */;
+		functionName = "-setBandwidth:";
+		hitCount = 0;
+		ignoreCount = 0;
+		lineNumber = 172;
+		location = BWThrottle;
+		modificationTime = 316038505.273736;
+		originalNumberOfMultipleMatches = 1;
+		state = 1;
+	};
+	EB640AFF12D65E980038894A /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 256AC3D90F4B6AC300CF3369 /* BWThrottleAppDelegate.m */;
+		name = "BWThrottleAppDelegate.m: 172";
+		rLen = 0;
+		rLoc = 4676;
+		rType = 0;
+		vrLen = 687;
+		vrLoc = 3695;
+	};
 	EB64640A10C2AC840025559A /* PlistBookmark */ = {
 		isa = PlistBookmark;
 		fRef = 8D1107310486CEB800E47090 /* BWThrottle-Info.plist */;
@@ -262,25 +312,22 @@
 		vrLen = 293;
 		vrLoc = 0;
 	};
-	EBAB5AEF1130208100C6029A /* PBXTextBookmark */ = {
+	EBBF5FC012AA6C1E00932B36 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = 256AC3D80F4B6AC300CF3369 /* BWThrottleAppDelegate.h */;
-		name = "BWThrottleAppDelegate.h: 5";
-		rLen = 0;
-		rLoc = 79;
+		fRef = EBBF5FC112AA6C1E00932B36 /* Authorization.h */;
+		name = "Authorization.h: 253";
+		rLen = 64;
+		rLoc = 12034;
 		rType = 0;
-		vrLen = 502;
-		vrLoc = 0;
+		vrLen = 2116;
+		vrLoc = 11120;
 	};
-	EBAB5B1E1130230500C6029A /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 256AC3D90F4B6AC300CF3369 /* BWThrottleAppDelegate.m */;
-		name = "BWThrottleAppDelegate.m: 29";
-		rLen = 0;
-		rLoc = 545;
-		rType = 0;
-		vrLen = 804;
-		vrLoc = 523;
+	EBBF5FC112AA6C1E00932B36 /* Authorization.h */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
+		name = Authorization.h;
+		path = /Developer/SDKs/MacOSX10.6.sdk/System/Library/Frameworks/Security.framework/Versions/A/Headers/Authorization.h;
+		sourceTree = "<absolute>";
 	};
 	EBC3B42F10C050C20042236C /* main.m */ = {
 		uiCtxt = {
@@ -301,18 +348,8 @@
 		hitCount = 0;
 		ignoreCount = 0;
 		lineNumber = 11;
-		modificationTime = 288367383.634115;
+		modificationTime = 316038807.849999;
 		originalNumberOfMultipleMatches = 1;
-		state = 0;
-	};
-	EBD9C81811380CB2002B778E /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 256AC3D90F4B6AC300CF3369 /* BWThrottleAppDelegate.m */;
-		name = "BWThrottleAppDelegate.m: 29";
-		rLen = 0;
-		rLoc = 545;
-		rType = 0;
-		vrLen = 807;
-		vrLoc = 522;
+		state = 1;
 	};
 }
